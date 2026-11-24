@@ -4,10 +4,13 @@ import { validate } from '../middleware/validate';
 import { loginSchema } from '../dto/auth.dto';
 import { asyncHandler } from '../utils/asyncHandler';
 import { authMiddleware } from '../middleware/auth';
+import { verificationRoutes } from './verificationRoutes'; 
 
 
 export const authRoutes = Router();
 
+// Mount verification routes under /api/auth
+authRoutes.use('/', verificationRoutes);
 
 // POST /api/auth/login - Public endpoint
 authRoutes.post(

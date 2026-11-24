@@ -13,16 +13,28 @@ export class AppError extends Error {
         this.statusCode = statusCode;
         this.errorCode = errorCode;
         this.isOperational = isOperational;
-        
+
         Error.captureStackTrace(this, this.constructor);
         Object.setPrototypeOf(this, new.target.prototype);
     }
 }
 
+export class BadRequestError extends Error {
+
+    constructor(message: string) {
+
+        super(message);
+
+        this.name = 'BadRequestError';
+
+    }
+
+}
+
 export class NotFoundError extends AppError {
     constructor(resource: string, id?: string | number) {
-        const message = id 
-            ? `${resource} with ID idnotfound`:`{resource} not found`;
+        const message = id
+            ? `${resource} with ID idnotfound` : `{resource} not found`;
         super(message, 404, 'NOT_FOUND');
     }
 }
